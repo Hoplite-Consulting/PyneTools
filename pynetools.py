@@ -39,6 +39,8 @@ def main(args):
             download('hoplite-consulting/vulnage', args.path)
         if args.epss:
             download('hoplite-consulting/epss-cli', args.path)
+        if args.crackpot:
+            download('hoplite-consulting/crackpot-cli', args.path)
 
     # Update Tools
     # if args.Update:
@@ -56,7 +58,7 @@ def main(args):
 
 if __name__ == "__main__":
     
-    __version__ = "1.0.0"
+    __version__ = "1.0.1"
     NAME = "PyneTools"
     DESCRIPTION = "An installer and updater for the collection of tools that work well with the Pyne Nessus Parser."
     try:
@@ -71,6 +73,7 @@ if __name__ == "__main__":
     parser.add_argument('--pyne', action='store_true', help='install pyne')
     parser.add_argument('--vulnage', action='store_true', help='install vulnage')
     parser.add_argument('--epss', action='store_true', help='install epss cli')
+    parser.add_argument('--crackpot', action='store_true', help='install crackpot cli')
     args = parser.parse_args()
 
     main(args)

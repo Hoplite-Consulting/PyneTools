@@ -14,7 +14,7 @@ pip3 install -r requirements.txt
 ```
 
 ```
-usage: pynetools.py [-h] [-A] [--pyne] [--vulnage] [--epss] path
+usage: pynetools.py [-h] [-A] [--pyne] [--vulnage] [--epss] [--crackpot] path
 
  ______                   _______            _      
 (_____ \                 (_______)          | |     
@@ -24,7 +24,7 @@ usage: pynetools.py [-h] [-A] [--pyne] [--vulnage] [--epss] path
 |_|     \__  |_| |_|\____)\______)___/ \___/|_(___/ 
        (____/                                       
 
-PyneTools 1.0.0
+PyneTools 1.0.1
 
 An installer and updater for the collection of tools that work well with the Pyne Nessus Parser.
 
@@ -37,4 +37,5 @@ options:
   --pyne      install pyne
   --vulnage   install vulnage
   --epss      install epss cli
+  --crackpot  install crackpot cli
 ```

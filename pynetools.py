@@ -6,7 +6,9 @@ except ImportError:
     pass
 import subprocess
 import argparse
+import os
 
+# Git Clone Tools
 def download(tool: str, path: str) -> subprocess.CompletedProcess:
     BASE = ['git', 'clone', '-b', 'release'] # -b release : Clones the branch named 'release'
     name = tool.split("/")[-1]
@@ -15,6 +17,17 @@ def download(tool: str, path: str) -> subprocess.CompletedProcess:
     cmd = BASE+url+path
     return subprocess.run(cmd)
 
+# Install Tool Requierments (Only works for Python Tools)
+def install():
+    try:
+        os.listdir(args.PATH)
+    except FileNotFoundError:
+        print("Tools Directory Not Found")
+        exit()
+    for tool in os.listdir(args.PATH):
+        cmd = ['pip3', 'install', '-r', args.PATH+"/"+tool+"/requirements.txt"]
+        subprocess.run(cmd)
+
 def main(args):
     print(TITLE)
 
@@ -22,17 +35,21 @@ def main(args):
     if args.ALL:
         for tool in TOOLS:
             download(tool, args.PATH)
+        install()
         exit()
+
     # Dynamically Install Selected Tools
-    else:
+    elif not args.ALL:
         for tool in TOOLS:
             t = tool.split("/")[1].replace("-","_")
             c = getattr(args, t)
             if c:
                 download(tool, args.PATH)
+        install()
+        exit()
 
     # Update Tools
-    # if args.UPDATE:
+    # elif not args.ALL and args.UPDATE:
     #     pass
 
 if __name__ == "__main__":

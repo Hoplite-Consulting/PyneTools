@@ -1,6 +1,6 @@
 # Pyne Tools
 
-This is a collection of tools that work well with the [Pyne](https://www.github.com/hoplite-consulting/pyne) Nessus Parser.
+This is a collection of tools that work well with the [Pyne](https://www.github.com/hoplite-consulting/pyne) Nessus Parser. Wrapped inside a clean installer and updater tool.
 
 Written by [Oliver Scotten](https://www.github.com/oliv10).
 

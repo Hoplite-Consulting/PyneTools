@@ -6,6 +6,7 @@ Written by [Oliver Scotten](https://www.github.com/oliv10).
 
 ### Requirements
 - Python 3.10.4 or greater
+- Git Installed
 
 ### Usage
 - Optional Install requirements

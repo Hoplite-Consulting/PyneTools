@@ -10,7 +10,7 @@ import os
 
 # Git Clone Tools
 def download(tool: str, path: str) -> subprocess.CompletedProcess:
-    BASE = ['git', 'clone', '-b', 'release'] # -b release : Clones the branch named 'release'
+    BASE = ['git', 'clone', '-b', 'release'] # -b release : Clones the branch named 'release' : This will be changed to the master branch after an internal CI/CD Update
     name = tool.split("/")[-1]
     path = [path+"/"+name]
     url = ["https://www.github.com/"+tool]
@@ -39,7 +39,7 @@ def main(args):
         exit()
 
     # Dynamically Install Selected Tools
-    elif not args.ALL:
+    elif not args.ALL and not args.UPDATE:
         for tool in TOOLS:
             t = tool.split("/")[1].replace("-","_")
             c = getattr(args, t)
@@ -49,8 +49,16 @@ def main(args):
         exit()
 
     # Update Tools
-    # elif not args.ALL and args.UPDATE:
-    #     pass
+    elif not args.ALL and args.UPDATE:
+        try:
+            s = os.listdir(args.PATH)
+        except FileNotFoundError:
+            print("Tools Directory Not Found")
+            exit()
+        for tool in os.listdir(args.PATH):
+            os.chdir(args.PATH+"/"+tool)
+            cmd = ['git', 'pull']
+            subprocess.run(cmd)
 
 if __name__ == "__main__":
     
@@ -66,7 +74,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=f"{TITLE}", formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument('PATH', help='path to store tools')
     parser.add_argument('-A', '--ALL', action='store_true', help='install all tools')
-    # parser.add_argument('-U', '--UPDATE', action='store_true', help='update installed tools (this will update ALL tools)') # Need to to more work for this, use list input for specific tools to update? Force all tools to be updated?
+    parser.add_argument('-U', '--UPDATE', action='store_true', help='update installed tools (this will update ALL tools)') # Need to to more work for this, use list input for specific tools to update? Force all tools to be updated?
 
     # Get Tools from Config
     with open("config/TOOLS.conf", "r") as file:

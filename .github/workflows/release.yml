@@ -13,6 +13,7 @@ jobs:
           github_token: ${{github.token}}
           branches: release
   Make-New:
+    if: ${{ always() }}
     needs: Delete-Old
     runs-on: ubuntu-latest
     steps:
